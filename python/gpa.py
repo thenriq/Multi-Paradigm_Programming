@@ -141,6 +141,7 @@ def printValues():
         print('%s - GPA:  %.2f' % ((students[i]), calculate_GPA(grades_average)))
         for j in range(len(grades)):
             print('Letter: %s, Module: %s' % (get_LETTER(int(grades[j])), module_name[j]))
+            
         print('Highest scoring: %d, Module: %s' % (max(grades), module_name[grades.index(max(grades))]))
         print('Lowest scoring: %d, Module: %s' % (min(grades), module_name[grades.index(min(grades))]))
         print('Standard Deviation: %.3f' % (stddev(grades)).real) # we only want the "real" part of that number
