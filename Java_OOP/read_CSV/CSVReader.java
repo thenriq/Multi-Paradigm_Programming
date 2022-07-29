@@ -1,12 +1,9 @@
 import java.io.BufferedReader;
 import java.io.File;
-//import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-//import java.util.List;
-import java.util.Arrays;
+
 
 public class CSVReader {
     public void csvReader() {
@@ -15,6 +12,8 @@ public class CSVReader {
         Get_LETTER getletter = new Get_LETTER();
 
         Max_Min_Median maxMinMedian = new Max_Min_Median();
+        
+        Calc_STD calcstd = new Calc_STD();
 
         
         BufferedReader br;
@@ -86,26 +85,14 @@ public class CSVReader {
                     }
                 }
 
-                System.out.println(maxMinMedian.get_max(grades));
-                System.out.println(maxMinMedian.min(grades));
-                //System.out.println(minValue);
-
-                
-                              
-                
-                
+                System.out.println( String.format("Highest scoring: %d, Module: %s", maxMinMedian.get_max(grades), module_names[ maxMinMedian.get_max_index(grades)]));
+                System.out.println( String.format("Lowest scoring: %d, MOdule: %s", maxMinMedian.get_min(grades), module_names[maxMinMedian.get_min_index(grades)]));
+                System.out.println( String.format("Standard Deviation: %.3f", calcstd.calc_std(grades)));
+                System.out.println( String.format("Median Value: %.2f", maxMinMedian.get_average(grades)));
 
             }
             
-            /*/
-            System.out.println(students);
-            System.out.println(mod1);
-            System.out.println(mod2);
-            System.out.println(mod3);
-            System.out.println(mod4);
-            System.out.println(mod5);
-            System.out.println(mod5);
-            */
+           
         } catch (IOException e) {
             e.printStackTrace();
         }
