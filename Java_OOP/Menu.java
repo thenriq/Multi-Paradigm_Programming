@@ -10,12 +10,12 @@ public class Menu {
         Integer choice = 0;
         do {
             
-            System.out.println(String.format("1) See all notes"));
+            System.out.println(String.format("\n1) See all notes"));
             System.out.println(String.format("2) Enter Grades"));
             System.out.println(String.format("3) Reprint entered notes"));
             System.out.println(String.format("0) Quit"));
 
-            System.out.println(String.format("Enter Choice: "));
+            System.out.print(String.format("Enter Choice: "));
             choice = sc.nextInt();
 
             switch(choice) {
@@ -34,6 +34,7 @@ public class Menu {
     
                 case 0:
                     exit = true;
+                    System.out.println("Thanks for using this program");
                     break;
             }
             

@@ -93,7 +93,7 @@ def menu():
 
 def printValues():
     global letter_index
-    with open('CTASample.csv') as csvfile:
+    with open('../CTASample.csv') as csvfile:
         next(csvfile)
         reader = csv.reader(csvfile)
 

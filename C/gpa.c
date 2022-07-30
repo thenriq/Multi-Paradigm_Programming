@@ -39,7 +39,7 @@ void printValues(courses values[]);
 void newModules(modules_input nM[]);
 void reprint(modules_input nM[]);
 int main() {
-    FILE * fp = fopen("CTASample.csv", "r");
+    FILE * fp = fopen("../CTASample.csv", "r");
     if (!fp) {
         printf("Error occured");
         return 0;

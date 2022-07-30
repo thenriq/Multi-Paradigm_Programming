@@ -8,20 +8,12 @@ import java.util.ArrayList;
 public class CSVReader {
     public void csvReader() {
         Calculate_GPA calcgpa = new Calculate_GPA();
-        
         Get_LETTER getletter = new Get_LETTER();
-
         Max_Min_Median maxMinMedian = new Max_Min_Median();
-        
         Calc_STD calcstd = new Calc_STD();
-
-        Menu menu = new Menu();
-        //New_Modules newModules = new New_Modules();
-
         
         BufferedReader br;
-        String file = "CTASample.csv";
-        //String line;
+        String file = "../CTASample.csv";
         String line = "";
         String delimiter = ",";
         int iteration = 0;
@@ -59,7 +51,6 @@ public class CSVReader {
                 mod4.add(data[4]);
                 mod5.add(data[5]);
                 mod6.add(data[6]);
-                
 
             }
 
@@ -77,9 +68,8 @@ public class CSVReader {
 
                 for (int j = 0; j < grades.length; j++){
                     System.out.println (String.format("Letter: %s, Module: %s", getletter.get_Letter(grades[j]) , module_names[j]));
-                    //System.out.println("");
                 }
-                
+               
 
                 int minValue = grades[0];
                 for (int k = 1; k < grades.length; k++) {
@@ -92,12 +82,8 @@ public class CSVReader {
                 System.out.println( String.format("Lowest scoring: %d, MOdule: %s", maxMinMedian.get_min(grades), module_names[maxMinMedian.get_min_index(grades)]));
                 System.out.println( String.format("Standard Deviation: %.3f", calcstd.calc_std(grades)));
                 System.out.println( String.format("Median Value: %.2f", maxMinMedian.get_average(grades)));
-                //newModules.new_Modules();
-                //newModules.reprint();
-                //menu.show_menu();
 
             }
-            
            
         } catch (IOException e) {
             e.printStackTrace();
