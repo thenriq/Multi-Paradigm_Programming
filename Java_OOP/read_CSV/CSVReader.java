@@ -15,6 +15,9 @@ public class CSVReader {
         
         Calc_STD calcstd = new Calc_STD();
 
+        Menu menu = new Menu();
+        //New_Modules newModules = new New_Modules();
+
         
         BufferedReader br;
         String file = "CTASample.csv";
@@ -89,6 +92,9 @@ public class CSVReader {
                 System.out.println( String.format("Lowest scoring: %d, MOdule: %s", maxMinMedian.get_min(grades), module_names[maxMinMedian.get_min_index(grades)]));
                 System.out.println( String.format("Standard Deviation: %.3f", calcstd.calc_std(grades)));
                 System.out.println( String.format("Median Value: %.2f", maxMinMedian.get_average(grades)));
+                //newModules.new_Modules();
+                //newModules.reprint();
+                //menu.show_menu();
 
             }
             
