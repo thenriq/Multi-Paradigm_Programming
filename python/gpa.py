@@ -59,7 +59,7 @@ def newModules():
     global new_mod_grade
     new_mod_grade = []
     
-    print('Enter Modules name and grades\n')
+    print('\nEnter Modules name and grades\n')
     for i in range(6):
         modName = str(input('Module %d:\n' %(i + 1)))
         modGrade = int(input('\nGrade for Module %s\n' % str(modName)))
@@ -86,7 +86,7 @@ def reprint():
         print('\nNo grades have been entered yet')
 
 def menu():
-    print('1) See all notes')
+    print('\n1) See all notes')
     print('2) Enter Grades')
     print('3) Reprint entered notes')
     print('0) Quit')
@@ -137,7 +137,7 @@ def printValues():
         max_index = grades.index(max(grades))
         
             
-        print('%s - GPA:  %.2f' % ((students[i]), calculate_GPA(grades_average)))
+        print('\n%s - GPA:  %.2f' % ((students[i]), calculate_GPA(grades_average)))
         for j in range(len(grades)):
             print('Letter: %s, Module: %s' % (get_LETTER(int(grades[j])), module_name[j]))
             
@@ -145,7 +145,7 @@ def printValues():
         print('Lowest scoring: %d, Module: %s' % (min(grades), module_name[grades.index(min(grades))]))
         print('Standard Deviation: %.3f' % (stddev(grades)).real) # we only want the "real" part of that number
         print('Median Value: %.2f' % (average(grades)))
-        print('')
+        #print('\n')
     #print(get_LETTER(50))
             
 def main():

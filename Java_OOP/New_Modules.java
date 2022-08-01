@@ -43,7 +43,7 @@ public class New_Modules {
     public void reprint() {
         
         try {
-            System.out.println(String.format("GPA: %.2f", (calcgpa.calculate_GPA(maxMinMedian.get_average(new_mod_grade))) ));
+            System.out.println(String.format("\nGPA: %.2f", (calcgpa.calculate_GPA(maxMinMedian.get_average(new_mod_grade))) ));
             for (int i = 0; i < number_modules; i++) {
                 System.out.println(String.format("Letter: %s, Module: %s",getletter.get_Letter(new_mod_grade[i]), new_mod_name[i]));
             }

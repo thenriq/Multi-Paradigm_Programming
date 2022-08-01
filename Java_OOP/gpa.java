@@ -7,7 +7,7 @@ StackOverflow - https://stackoverflow.com/questions/67582636/reading-data-from-c
 Geeksforgeeks - https://www.geeksforgeeks.org/arrays-in-java/
 Youtube (Java: Array vs ArrayList Difference) - https://www.youtube.com/watch?v=ZVJ7kpEMc7U
 */
-public class App {
+public class gpa {
 
     public static void main(String[] args) {
         Menu menu = new Menu(); // instantiation class "Menu"

@@ -107,7 +107,7 @@ int main() {
     // menu to the user
     while (true) {
         // present the menu, accept the user's choice
-        printf("1) See all notes\n");
+        printf("\n1) See all notes\n");
         printf("2) Enter Grades\n");
         printf("3) Reprint entered notes\n");
         printf("0) Quit\n");
@@ -353,7 +353,7 @@ void printValues(courses values[]) {
         printf("Highest scoring: %d, Module: %s\n", max, values[(xyz + 1)].module_name);
         printf("Lowest scoring: %d, Module: %s\n", min, values[(xzy + 1)].module_name);
         printf("Standard Deviation: %.3f\n", StandardDeviation(myNumbers));
-        printf("Median Value: %.2f\n", grades_average);
+        printf("Median Value: %.2f", grades_average);
         printf("\n");
 
         max = 0;
