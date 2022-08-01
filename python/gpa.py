@@ -96,7 +96,6 @@ def printValues():
     with open('../CTASample.csv') as csvfile:
         next(csvfile)
         reader = csv.reader(csvfile)
-
         count = 0
         
         # Defining arrays
