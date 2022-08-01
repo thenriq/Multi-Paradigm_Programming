@@ -53,15 +53,16 @@ int main() {
     modules_input nM[999];
     
 
-    int i = 0;
-
+    
+    // assigning course names to struct "Courses"
     strcpy(values[1].module_name, "Intro to Programming");
     strcpy(values[2].module_name, "Databases");
     strcpy(values[3].module_name, "Computer Architecture");
     strcpy(values[4].module_name, "Ethics in Computer Science");
     strcpy(values[5].module_name, "Advanced Programming");
     strcpy(values[6].module_name, "Puzzles and Problem Solving");
-
+    
+    int i = 0;
     while (fgets(buff, 1024, fp)) {
         field_count = 0;
         row_count++;
@@ -127,7 +128,8 @@ int main() {
             newModules(nM);
 
             break;
-
+            
+            // Reprint grades entered by user
         case 3:
             reprint(nM);
 
@@ -162,7 +164,7 @@ float average(float data[]) {
 float calcule_GPA(float grade) {
     int grades, gpa_index;
     float gpa_value;
-    double gpavalue[18] = {
+    double gpavalue[18] = { // array size 18 matches with number of elements of array letter (from A+ down to F-)
         0.8,
         1.0,
         1.2,
@@ -183,7 +185,8 @@ float calcule_GPA(float grade) {
         4.2
     };
 
-    for (int i = 10; i < 100; i += 5) {
+    for (int i = 10; i < 100; i += 5) { // 100 is the maximum grade allowed
+
         //GPA will be calculated on chunks of 5% increment
         if (grade >= i) {
             if ((i + 5) > grade) {
@@ -192,7 +195,7 @@ float calcule_GPA(float grade) {
         }
     }
 
-    gpa_value = gpavalue[gpa_index]; // assigning GPA value based on its index in array
+    gpa_value = gpavalue[gpa_index]; // assigning GPA value based on its index in array "gpavalue"
     return gpa_value;
 }
 
@@ -220,28 +223,9 @@ const char * get_LETTER(double grade) {
         "A",
         "A+"
     };
-    double gpavalue[18] = {
-        0.8,
-        1.0,
-        1.2,
-        1.4,
-        1.6,
-        1.8,
-        2,
-        2.2,
-        2.4,
-        2.6,
-        2.8,
-        3,
-        3.2,
-        3.4,
-        3.6,
-        3.8,
-        4,
-        4.2
-    };
+    
     for (int i = 10; i < 100; i += 5) {
-        grades = i + 5; //GPA will be calculated on chunks of 5% increment
+        grades = i + 5; //Letters will be calculated on chunks of 5% increment on grades (0 to 100)
 
         if (grade >= i) {
             if ((i + 5) > grade) {
@@ -254,31 +238,28 @@ const char * get_LETTER(double grade) {
 }
 
 //Live mode - user input
-
-
-
 void newModules(modules_input nM[]) {
     int result;
 
     printf("\nEnter Modules name and grades\n ");
     for (int i = 0; i < max_modules; i++) {
         printf("\nModule %d\n", i + 1);
-        scanf("%s", nM[i].new_module_name);
+        scanf("%s", nM[i].new_module_name); // feeding new structure with input from user
         printf("\nGrade for Module %s\n", nM[i].new_module_name);
-        scanf("%d", & nM[i].new_m1);
+        scanf("%d", & nM[i].new_m1); // feeding new structure with input from user
         while ((nM[i].new_m1 > 99) || (nM[i].new_m1 < 1)){
             printf(">> Grades must be between 1 and 99, please try again! <<\n");
             printf("\nGrade for Module %s\n", nM[i].new_module_name);
             scanf("%d", & nM[i].new_m1);
         }
-        temp_Marks[i] = nM[i].new_m1;
-    }
+        temp_Marks[i] = nM[i].new_m1; // feeding temp array with content from new struct 
+    }                                 //this will be used to calculate grades average, and then, to calculate GPA value 
 
     avg = average(temp_Marks);
-    printf("\nGPA: %.2f\n", (calcule_GPA(avg)));
+    printf("\nGPA: %.2f\n", (calcule_GPA(avg))); // calling function "calculate_GPA"
     for (int j = 0; j < max_modules; j++) {
-        temp_Marks[j] = nM[j].new_m1;
-
+        temp_Marks[j] = nM[j].new_m1; // feeding array "temp_Marks with content from new struct
+                                      // this will be used on "reprint" function  
         printf("Letter: %s, Module: %s\n", get_LETTER(nM[j].new_m1), nM[j].new_module_name);
     }
     printf("\n");
@@ -287,7 +268,7 @@ void newModules(modules_input nM[]) {
 // Function to reprint previously entered new modules and marks
 void reprint(modules_input nM[]) {
     //float x =  (calcule_GPA(avg));
-    if ((calcule_GPA(avg)) == 0){
+    if ((calcule_GPA(avg)) == 0){ // No GPA calculated means that new grades were not entered by user
         printf("\nNo grades have been entered yet\n\n");
         
     } 
@@ -296,7 +277,7 @@ void reprint(modules_input nM[]) {
         for (int j = 0; j < max_modules; j++) {
             temp_Marks[j] = nM[j].new_m1;
 
-            printf("Letter: %s, Module: %s\n", get_LETTER(nM[j].new_m1), nM[j].new_module_name);
+            printf("Letter: %s, Module: %s\n", get_LETTER(nM[j].new_m1), nM[j].new_module_name); //outputing marks and module names
         }
     }
 }
@@ -339,6 +320,7 @@ void printValues(courses values[]) {
         myNumbers[4] = mod5;
         myNumbers[5] = mod6;
 
+        // Calculating average value from grades - this will be used to calculate GPA
         grades_average = average(myNumbers);
 
         // Printint all students names along with their GPA, letter marks and module names
