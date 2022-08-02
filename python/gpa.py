@@ -6,19 +6,12 @@ from statistics import stdev
 
 def get_LETTER(grade):
     global letter_index
-    #global charact
     letter = ["F-","F","F+","E-","E","E+","D-","D","D+","C-","C","C+","B-","B","B+","A-","A","A+"]
-    
-    gpavalue = [0.8,1.0,1.2,1.4,1.6,1.8,2,2.2,2.4,2.6,2.8,3,3.2,3.4,3.6,3.8,4,4.2]
     i = 10
-    #grade = 0
-    
     for i in range(10,100, 5):
-        #print(i)
         if(grade >= i):
             if ((i + 5) > grade):
                  letter_index = ((i / 5) - 2)
-                 #return letter_index
                  return letter[int(letter_index)]
         
 
@@ -26,12 +19,9 @@ def calculate_GPA(grade):
     gpavalue = [0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2]
     i = 10
     for i in range(10,100, 5):
-        #print(i)
         if(grade >= i):
             if ((i + 5) > grade):
                  gpa_index = ((i / 5) - 2)
-                 #return letter_index
-                 #return letter[int(letter_index)]
     gpa_value = gpavalue[int(gpa_index)]
     return gpa_value
     

@@ -225,8 +225,6 @@ const char * get_LETTER(double grade) {
     };
     
     for (int i = 10; i < 100; i += 5) {
-        grades = i + 5; //Letters will be calculated on chunks of 5% increment on grades (0 to 100)
-
         if (grade >= i) {
             if ((i + 5) > grade) {
                 letter_index = ((i / 5) - 2); // assigning GPA value based on its index in array
@@ -243,7 +241,7 @@ void newModules(modules_input nM[]) {
 
     printf("\nEnter Modules name and grades\n ");
     for (int i = 0; i < max_modules; i++) {
-        printf("\nModule %d\n", i + 1);
+        printf("\nModule %d:\n", i + 1);
         scanf("%s", nM[i].new_module_name); // feeding new structure with input from user
         printf("\nGrade for Module %s\n", nM[i].new_module_name);
         scanf("%d", & nM[i].new_m1); // feeding new structure with input from user
