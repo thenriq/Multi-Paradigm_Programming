@@ -13,7 +13,6 @@ def get_LETTER(grade):
             if ((i + 5) > grade):
                  letter_index = ((i / 5) - 2)
                  return letter[int(letter_index)]
-        
 
 def calculate_GPA(grade):
     gpavalue = [0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2]
@@ -40,10 +39,10 @@ def variance(data):
     return mean([(x - mu) ** 2 for x in data])
 
 def stddev(data):
-    #print (sqrt(variance(data)))
     return sqrt(variance(data))
 
 def newModules():
+# Source: https://stackoverflow.com/questions/11758029/try-block-inside-while-statement    
     global new_mod_name
     new_mod_name = []
     global new_mod_grade
@@ -52,13 +51,17 @@ def newModules():
     print('\nEnter Modules name and grades\n')
     for i in range(6):
         modName = str(input('Module %d:\n' %(i + 1)))
-        modGrade = int(input('\nGrade for Module %s\n' % str(modName)))
-        while ((modGrade > 99) or (modGrade < 1)):
-            print(">> Grades must be between 1 and 99, please try again! <<\n")
-            modGrade = int(input('\nGrade for Module %s\n' % str(modName)))
-        print('')
-        
-        
+        while True:
+            try:
+                modGrade = int(input('\nGrade for Module %s\n' % str(modName)))
+                while ((modGrade > 99) or (modGrade < 1)):
+                    print(">> Grades must be between 1 and 99, please try again! <<\n")
+                    modGrade = int(input('\nGrade for Module %s\n' % str(modName)))
+                print('')
+            except ValueError:
+                print(">> Grades must be an integer number, please try again! <<")
+            else:
+                break
         new_mod_name.append(modName)
         new_mod_grade.append(modGrade)
     
@@ -99,7 +102,6 @@ def printValues():
         grades = [None] * 6
         module_name = ['Intro to Programming', 'Databases', 'Computer Architecture', 'Ethics in Computer Science', 'Advanced Programming', 'Puzzles and Problem Solving']
         
-        
         for row in reader:
             count += 1
             # creating array from columns
@@ -122,10 +124,7 @@ def printValues():
         grades[3] = int(col_mod4[i])
         grades[4] = int(col_mod5[i])
         grades[5] = int(col_mod6[i])
-        
         grades_average = average(grades)
-        max_index = grades.index(max(grades))
-        
             
         print('\n%s - GPA:  %.2f' % ((students[i]), calculate_GPA(grades_average)))
         for j in range(len(grades)):
@@ -135,14 +134,11 @@ def printValues():
         print('Lowest scoring: %d, Module: %s' % (min(grades), module_name[grades.index(min(grades))]))
         print('Standard Deviation: %.3f' % (stddev(grades)).real) # we only want the "real" part of that number
         print('Median Value: %.2f' % (average(grades)))
-        #print('\n')
-    #print(get_LETTER(50))
             
 def main():
     menu()
     option = int(input('Enter Choice: '))
-    
-    
+
     while option != 0:
         if option == 1:
             printValues() 
