@@ -56,7 +56,7 @@ public class New_Modules {
                 System.out.println(String.format("Letter: %s, Module: %s",getletter.get_Letter(new_mod_grade[i]), new_mod_name[i]));
             }
         } catch(Exception e) {
-            System.out.println("\nNo grades have been entered yet");
+            System.out.println("\nNo grades have been entered yet\n");
         }
     }
 }
