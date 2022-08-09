@@ -5,11 +5,17 @@ https://stackoverflow.com/questions/35831715/create-array-of-strings-inside-of-s
 */
 
 #include <stdio.h>
+
 #include <stdlib.h>
+
 #include <string.h>
+
 #include <math.h>
+
 #include <stdbool.h>
+
 #include <ctype.h>
+
 #define max_modules 6
 #define BUFFER_SIZE 4096
 
@@ -23,14 +29,15 @@ typedef struct Courses {
     char m5[50];
     char m6[50];
 
-}courses;
+}
+courses;
 
 typedef struct Modules_input {
     char new_module_name[50];
     int new_m1;
 
-}modules_input;
-
+}
+modules_input;
 
 //Global variables
 float temp_Marks[max_modules];
@@ -42,68 +49,8 @@ void newModules(modules_input nM[]);
 void reprint(modules_input nM[]);
 
 int main() {
-    FILE * fp = fopen("D:\\Users\\Thiago\\Documents\\OneDrive - GMIT\\GMIT\\Deferral\\Multi_Paradigm_Programming\\Deferred Assessment\\coding\\CTASample.csv", "r");
-    if (!fp) {
-        printf("Error occured");
-        return 0;
-    }
-
-    char buff[1024]; //stores the first 1024 lines into buff
-
-    int field_count = 0;
-
     courses values[999]; //array to structs to store values
     modules_input nM[999];
-    
-    
-    // assigning course names to struct "Courses"
-    strcpy(values[1].module_name, "Intro to Programming");
-    strcpy(values[2].module_name, "Databases");
-    strcpy(values[3].module_name, "Computer Architecture");
-    strcpy(values[4].module_name, "Ethics in Computer Science");
-    strcpy(values[5].module_name, "Advanced Programming");
-    strcpy(values[6].module_name, "Puzzles and Problem Solving");
-    
-    int i = 0;
-    while (fgets(buff, 1024, fp)) {
-        field_count = 0;
-        row_count++;
-        if (row_count == 1)
-            continue;
-        char * field = strtok(buff, ","); // separate buff with commas
-        while (field) {
-            if (field_count == 0)
-                strcpy(values[i].student_name, field);
-
-            if (field_count == 1) {
-                strcpy(values[i].m1, field);
-            }
-
-            if (field_count == 2) {
-                strcpy(values[i].m2, field);
-            }
-
-            if (field_count == 3)
-                strcpy(values[i].m3, field);
-
-            if (field_count == 4)
-                strcpy(values[i].m4, field);
-
-            if (field_count == 5)
-                strcpy(values[i].m5, field);
-
-            if (field_count == 6)
-                strcpy(values[i].m6, field);
-
-            field = strtok(NULL, ",");
-            field_count++; // update field value
-        }
-
-        i++;
-    }
-
-    fclose(fp);
-
     int choice = 0;
 
     // menu to the user
@@ -115,7 +62,6 @@ int main() {
         printf("0) Quit\n");
         printf("Enter Choice: ");
         scanf("%d", & choice);
-        
 
         // decide what action to carry out based on the user's choice
         switch (choice) {
@@ -130,7 +76,7 @@ int main() {
             newModules(nM);
 
             break;
-            
+
             // Reprint grades entered by user
         case 3:
             reprint(nM);
@@ -141,13 +87,12 @@ int main() {
         case 0:
             printf("Thanks for using this program. \n");
             exit(0);
-            
+
         }
     }
-    
 
     return 0;
-    
+
 }
 
 // Function to calculate average of an array
@@ -225,7 +170,7 @@ const char * get_LETTER(double grade) {
         "A",
         "A+"
     };
-    
+
     for (int i = 10; i < 100; i += 5) {
 
         if (grade >= i) {
@@ -238,10 +183,9 @@ const char * get_LETTER(double grade) {
     return letter[letter_index];
 }
 
+bool parse_int(char * string, int * integer) {
 
-bool parse_int(char *string, int *integer) {
-
-//Source: Portfolio Courses - https://www.youtube.com/watch?v=W3dtyZr8rcY
+    //Source: Portfolio Courses - https://www.youtube.com/watch?v=W3dtyZr8rcY
     int i = 0;
 
     while (isspace(string[i])) i++; // will "walk" along the string while it finds a blank space
@@ -261,7 +205,7 @@ bool parse_int(char *string, int *integer) {
         if (!isdigit(string[i])) return false; // if no valid integer in the string
     }
 
-    while (i < length && ! isspace(string[i])){
+    while (i < length && !isspace(string[i])) {
         if (!isdigit(string[i])) return false; // no integer found in the string
 
         integer_buffer[integer_chars] = string[i];
@@ -272,16 +216,15 @@ bool parse_int(char *string, int *integer) {
 
     integer_buffer[integer_chars] = '\0';
 
-    while(isspace(string[i])) i++; // loop through any of the trailing white space characters whether spaces characters or any thing else
+    while (isspace(string[i])) i++; // loop through any of the trailing white space characters whether spaces characters or any thing else
 
-    if(string[i] != '\0') return false; //
+    if (string[i] != '\0') return false; //
 
-    *integer = atoi(integer_buffer); // convert the integer value
+    * integer = atoi(integer_buffer); // convert the integer value
 
     return true;
 
 }
-
 
 //Live mode - user input
 void newModules(modules_input nM[]) {
@@ -290,48 +233,45 @@ void newModules(modules_input nM[]) {
     bool parsed_correct = true, value_correct = true;
     int integer = 1;
 
-
     printf("\nEnter Modules name and grades\n ");
     for (int i = 0; i < max_modules; i++) {
         printf("\nModule %d:\n", i + 1);
         scanf("%s", nM[i].new_module_name); // feeding new structure with input from user
-        fflush (stdin);
+        fflush(stdin);
 
         // Checking for valid integer values
-        do{
+        do {
             printf("\nGrade for Module %s\n", nM[i].new_module_name);
 
-           
             char buffer[BUFFER_SIZE];
-            
+
             fgets(buffer, BUFFER_SIZE, stdin);
-            fflush (stdin);
-                     
-            parsed_correct = parse_int(buffer, &integer);
+            fflush(stdin);
+
+            parsed_correct = parse_int(buffer, & integer);
             value_correct = true;
-           
-            if (!parsed_correct) 
+
+            if (!parsed_correct)
                 printf(">> Grades must be an integer number, please try again! <<\n");
-                
-            
-             if ((integer > 99) || (integer < 1)){
+
+            if ((integer > 99) || (integer < 1)) {
                 value_correct = false;
                 printf(">> Grades must be between 1 and 99, please try again! <<\n");
                 integer = 1;
             }
 
-        } while((!parsed_correct) || (!value_correct)) ;
+        } while ((!parsed_correct) || (!value_correct));
 
         nM[i].new_m1 = integer;
-      
+
         temp_Marks[i] = nM[i].new_m1; // feeding temp array with content from new struct 
-    }                                 //this will be used to calculate grades average, and then, to calculate GPA value 
+    } //this will be used to calculate grades average, and then, to calculate GPA value 
 
     avg = average(temp_Marks);
     printf("\nGPA: %.2f\n", (calcule_GPA(avg))); // calling function "calculate_GPA"
     for (int j = 0; j < max_modules; j++) {
         temp_Marks[j] = nM[j].new_m1; // feeding array "temp_Marks with content from new struct
-                                      // this will be used on "reprint" function  
+        // this will be used on "reprint" function  
         printf("Letter: %s, Module: %s\n", get_LETTER(nM[j].new_m1), nM[j].new_module_name);
     }
     printf("\n");
@@ -340,11 +280,10 @@ void newModules(modules_input nM[]) {
 // Function to reprint previously entered new modules and marks
 void reprint(modules_input nM[]) {
     //float x =  (calcule_GPA(avg));
-    if ((calcule_GPA(avg)) == 0){ // No GPA calculated means that new grades were not entered by user
+    if ((calcule_GPA(avg)) == 0) { // No GPA calculated means that new grades were not entered by user
         printf("\nNo grades have been entered yet\n\n");
-        
-    } 
-    else{
+
+    } else {
         printf("\nGPA: %.2f\n", (calcule_GPA(avg)));
         for (int j = 0; j < max_modules; j++) {
             temp_Marks[j] = nM[j].new_m1;
@@ -375,6 +314,65 @@ float StandardDeviation(float data[]) {
 void printValues(courses values[]) {
     int mod1, mod2, mod3, mod4, mod5, mod6, max, min, xyz, xzy;
     float myNumbers[6], sum, grades_average;
+
+    FILE * fp = fopen("../CTASample.csv", "r");
+    if (!fp) {
+        printf("Error occured");
+        //return 0;
+    }
+
+    char buff[1024]; //stores the first 1024 lines into buff
+
+    int field_count = 0;
+
+    // assigning course names to struct "Courses"
+    strcpy(values[1].module_name, "Intro to Programming");
+    strcpy(values[2].module_name, "Databases");
+    strcpy(values[3].module_name, "Computer Architecture");
+    strcpy(values[4].module_name, "Ethics in Computer Science");
+    strcpy(values[5].module_name, "Advanced Programming");
+    strcpy(values[6].module_name, "Puzzles and Problem Solving");
+
+    int i = 0;
+    row_count = 0;
+    while (fgets(buff, 1024, fp)) {
+        field_count = 0;
+        row_count++;
+        if (row_count == 1)
+            continue;
+        char * field = strtok(buff, ","); // separate buff with commas
+        while (field) {
+            if (field_count == 0)
+                strcpy(values[i].student_name, field);
+
+            if (field_count == 1) {
+                strcpy(values[i].m1, field);
+            }
+
+            if (field_count == 2) {
+                strcpy(values[i].m2, field);
+            }
+
+            if (field_count == 3)
+                strcpy(values[i].m3, field);
+
+            if (field_count == 4)
+                strcpy(values[i].m4, field);
+
+            if (field_count == 5)
+                strcpy(values[i].m5, field);
+
+            if (field_count == 6)
+                strcpy(values[i].m6, field);
+
+            field = strtok(NULL, ",");
+            field_count++; // update field value
+        }
+
+        i++;
+    }
+
+    fclose(fp);
 
     for (int i = 0; i <= (row_count - 2); i++) {
         // Converting values from char into int
