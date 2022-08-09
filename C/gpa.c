@@ -9,7 +9,9 @@ https://stackoverflow.com/questions/35831715/create-array-of-strings-inside-of-s
 #include <string.h>
 #include <math.h>
 #include <stdbool.h>
+#include <ctype.h>
 #define max_modules 6
+#define BUFFER_SIZE 4096
 
 typedef struct Courses {
     char module_name[50];
@@ -38,8 +40,9 @@ int row_count = 0;
 void printValues(courses values[]);
 void newModules(modules_input nM[]);
 void reprint(modules_input nM[]);
+
 int main() {
-    FILE * fp = fopen("../CTASample.csv", "r");
+    FILE * fp = fopen("D:\\Users\\Thiago\\Documents\\OneDrive - GMIT\\GMIT\\Deferral\\Multi_Paradigm_Programming\\Deferred Assessment\\coding\\CTASample.csv", "r");
     if (!fp) {
         printf("Error occured");
         return 0;
@@ -52,7 +55,6 @@ int main() {
     courses values[999]; //array to structs to store values
     modules_input nM[999];
     
-
     
     // assigning course names to struct "Courses"
     strcpy(values[1].module_name, "Intro to Programming");
@@ -225,6 +227,7 @@ const char * get_LETTER(double grade) {
     };
     
     for (int i = 10; i < 100; i += 5) {
+
         if (grade >= i) {
             if ((i + 5) > grade) {
                 letter_index = ((i / 5) - 2); // assigning GPA value based on its index in array
@@ -235,21 +238,92 @@ const char * get_LETTER(double grade) {
     return letter[letter_index];
 }
 
+
+bool parse_int(char *string, int *integer) {
+
+//Source: Portfolio Courses - https://www.youtube.com/watch?v=W3dtyZr8rcY
+    int i = 0;
+
+    while (isspace(string[i])) i++; // will "walk" along the string while it finds a blank space
+
+    int length = strlen(string); // return length of string
+
+    if (length == i) return false;
+
+    char integer_buffer[BUFFER_SIZE]; // character array to store the string representation of a string
+    int integer_chars = 0;
+
+    if (string[i] == '-') {
+        integer_buffer[integer_chars] = '-'; // check for negative numbers
+        integer_chars++;
+        i++;
+
+        if (!isdigit(string[i])) return false; // if no valid integer in the string
+    }
+
+    while (i < length && ! isspace(string[i])){
+        if (!isdigit(string[i])) return false; // no integer found in the string
+
+        integer_buffer[integer_chars] = string[i];
+
+        integer_chars++;
+        i++;
+    }
+
+    integer_buffer[integer_chars] = '\0';
+
+    while(isspace(string[i])) i++; // loop through any of the trailing white space characters whether spaces characters or any thing else
+
+    if(string[i] != '\0') return false; //
+
+    *integer = atoi(integer_buffer); // convert the integer value
+
+    return true;
+
+}
+
+
 //Live mode - user input
 void newModules(modules_input nM[]) {
-    int result;
+    int result, ioInt;
+    char ioChar;
+    bool parsed_correct = true, value_correct = true;
+    int integer = 1;
+
 
     printf("\nEnter Modules name and grades\n ");
     for (int i = 0; i < max_modules; i++) {
         printf("\nModule %d:\n", i + 1);
         scanf("%s", nM[i].new_module_name); // feeding new structure with input from user
-        printf("\nGrade for Module %s\n", nM[i].new_module_name);
-        scanf("%d", & nM[i].new_m1); // feeding new structure with input from user
-        while ((nM[i].new_m1 > 99) || (nM[i].new_m1 < 1)){
-            printf(">> Grades must be between 1 and 99, please try again! <<\n");
+        fflush (stdin);
+
+        // Checking for valid integer values
+        do{
             printf("\nGrade for Module %s\n", nM[i].new_module_name);
-            scanf("%d", & nM[i].new_m1);
-        }
+
+           
+            char buffer[BUFFER_SIZE];
+            
+            fgets(buffer, BUFFER_SIZE, stdin);
+            fflush (stdin);
+                     
+            parsed_correct = parse_int(buffer, &integer);
+            value_correct = true;
+           
+            if (!parsed_correct) 
+                printf(">> Grades must be an integer number, please try again! <<\n");
+                
+            
+             if ((integer > 99) || (integer < 1)){
+                value_correct = false;
+                printf(">> Grades must be between 1 and 99, please try again! <<\n");
+                integer = 1;
+            }
+
+        } while((!parsed_correct) || (!value_correct)) ;
+
+        nM[i].new_m1 = integer;
+      
         temp_Marks[i] = nM[i].new_m1; // feeding temp array with content from new struct 
     }                                 //this will be used to calculate grades average, and then, to calculate GPA value 
 
@@ -277,6 +351,7 @@ void reprint(modules_input nM[]) {
 
             printf("Letter: %s, Module: %s\n", get_LETTER(nM[j].new_m1), nM[j].new_module_name); //outputing marks and module names
         }
+        printf("\n");
     }
 }
 
