@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class CSVReader {
     public void csvReader() {
 
@@ -35,7 +34,6 @@ public class CSVReader {
         ArrayList<String> mod4 = new ArrayList<String>();
         ArrayList<String> mod5 = new ArrayList<String>();
         ArrayList<String> mod6 = new ArrayList<String>();
-       
         
         try{
             br = new BufferedReader(new FileReader(new File(file)));
@@ -55,7 +53,6 @@ public class CSVReader {
                 mod4.add(data[4]);
                 mod5.add(data[5]);
                 mod6.add(data[6]);
-
             }
 
             // Main looping - this will print each of student's names along with their grades, GPA and letter marks
@@ -76,7 +73,6 @@ public class CSVReader {
                 for (int j = 0; j < grades.length; j++){
                     System.out.println (String.format("Letter: %s, Module: %s", getletter.get_Letter(grades[j]) , module_names[j]));
                 }
-               
 
                 int minValue = grades[0];
                 for (int k = 1; k < grades.length; k++) {
@@ -90,13 +86,9 @@ public class CSVReader {
                 System.out.println( String.format("Lowest scoring: %d, MOdule: %s", maxMinMedian.get_min(grades), module_names[maxMinMedian.get_min_index(grades)]));
                 System.out.println( String.format("Standard Deviation: %.3f", calcstd.calc_std(grades)));
                 System.out.println( String.format("Median Value: %.2f", maxMinMedian.get_average(grades)));
-
             }
-           
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    
 }

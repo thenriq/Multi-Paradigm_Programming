@@ -10,7 +10,6 @@ public class Max_Min_Median {
         }
         return (max);
     }
-
     
     // This index will be used to get the module name. "grade" index and "module" index are tied together
     public Integer get_max_index(Integer [] grade) { 
@@ -44,13 +43,10 @@ public class Max_Min_Median {
 		   if(grade[i]<min) {
 			  min = grade[i];
               index = i;
-              
 		   }
 		}
 		return index;
 	 }
-
-
 
      public double get_average(Integer [] grade) {
         Integer i = 0;

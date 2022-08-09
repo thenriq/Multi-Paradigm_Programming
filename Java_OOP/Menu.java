@@ -5,7 +5,6 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         CSVReader reader = new CSVReader();
         New_Modules newmodules = new New_Modules();
-
         boolean exit = false;
         Integer choice = 0;
         
@@ -44,14 +43,8 @@ public class Menu {
                     System.out.println("Thanks for using this program");
                     break;
             }
-            
                 
         } while (!exit);
         sc.close();
-    
-        
     }
-
-    
-    
 }

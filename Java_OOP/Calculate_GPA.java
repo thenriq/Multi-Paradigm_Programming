@@ -20,8 +20,5 @@ public class Calculate_GPA {
 
         gpa_value = (gpavalue[gpa_index]); // assigning GPA value based on its index in array "gpavalue"
         return gpa_value;
-
-        
     }
-    
 }
